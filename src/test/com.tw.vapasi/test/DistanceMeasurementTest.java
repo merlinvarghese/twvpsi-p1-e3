@@ -1,16 +1,22 @@
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
     class DistanceMeasurementTest {
-    @Test
-    void expectTrueFor100CMand1M() {
-        DistanceMeasurement centimeter100 = new DistanceMeasurement(100,"cm");
-        DistanceMeasurement meter1 = new DistanceMeasurement(1,"m");
 
-        assertTrue(centimeter100.equals(meter1));
+    @Test
+    void expectFalseFor100CMandNull() {
+        DistanceMeasurement centimeter100 = new DistanceMeasurement(100,"cm");
+        assertFalse(centimeter100.equals(null));
     }
+
+    @Test
+    void expectTrueFor100CMandSameReference() {
+        DistanceMeasurement centimeter100 = new DistanceMeasurement(100,"cm");
+
+        assertTrue(centimeter100.equals(centimeter100));
+    }
+
     @Test
     void expectTrueFor100CMand100CM() {
         DistanceMeasurement centimeter100 = new DistanceMeasurement(100,"cm");
@@ -18,6 +24,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
         assertTrue(centimeter100.equals(centimeter100Other));
     }
+
+    @Test
+    void expectTrueFor100CMand200CM() {
+        DistanceMeasurement centimeter100 = new DistanceMeasurement(100,"cm");
+        DistanceMeasurement centimeter100Other = new DistanceMeasurement(200,"cm");
+
+        assertFalse(centimeter100.equals(centimeter100Other));
+    }
+
+    @Test
+    void expectTrueFor100CMand1M() {
+        DistanceMeasurement centimeter100 = new DistanceMeasurement(100,"cm");
+        DistanceMeasurement meter1 = new DistanceMeasurement(1,"m");
+
+        assertTrue(centimeter100.equals(meter1));
+    }
+
     @Test
     void expectFalseFor100CMand1KM() {
         DistanceMeasurement centimeter100 = new DistanceMeasurement(100,"cm");

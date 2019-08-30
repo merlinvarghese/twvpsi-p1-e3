@@ -3,33 +3,41 @@
 
     private double value;
     private String units;
+
+    private final String UNIT_CENTIMETER = "cm";
+    private final String UNIT_METER = "m";
+    private final String UNIT_KILOMETER = "km";
+    private final int VALUE_ONELAKH = 100000;
+    private final int VALUE_HUNDRED = 100;
+
     DistanceMeasurement(double value, String units) {
         this.value = value;
         this.units = units;
     }
 
-    boolean equals(DistanceMeasurement measurementToCompare) {
-        if( this == measurementToCompare )
+    private double convertToCentimeter()
+    {
+        if( this.units.equals(UNIT_METER)) {
+            return this.value * VALUE_HUNDRED;
+        }
+        if( this.units.equals(UNIT_KILOMETER)) {
+            return this.value * VALUE_ONELAKH;
+        }
+        return this.value;
+
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if( this == object )
             return true;
-        if( measurementToCompare == null || this.getClass() != measurementToCompare.getClass() )
+        if( object == null || this.getClass() != object.getClass() )
             return false;
+        DistanceMeasurement measurementToCompare = (DistanceMeasurement)object;
         if( this.units.equals( measurementToCompare.units ))
         {
             return this.value == measurementToCompare.value;
         }
-        return convertToCM( this ).value == ( convertToCM( measurementToCompare ).value);
-
-
-    }
-    private DistanceMeasurement convertToCM( DistanceMeasurement measurement)
-    {
-        if( measurement.units.equals("m")) {
-            return new DistanceMeasurement( measurement.value * 100,"cm");
-        }
-        if( measurement.units.equals("km")) {
-            return new DistanceMeasurement(measurement.value * 100000,"cm");
-        }
-        return measurement;
-
+        return this.convertToCentimeter() == measurementToCompare.convertToCentimeter() ;
     }
 }
