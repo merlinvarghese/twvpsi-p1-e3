@@ -1,14 +1,23 @@
+package com.tw.vapasi;
+
 //Understand dimensions
     class DistanceMeasurement {
 
     private double value;
     private String units;
+    //private final Unit units;
 
     private final String UNIT_CENTIMETER = "cm";
     private final String UNIT_METER = "m";
     private final String UNIT_KILOMETER = "km";
     private final int VALUE_ONELAKH = 100000;
     private final int VALUE_HUNDRED = 100;
+
+    enum Unit{
+        KM,
+        CM,
+        M
+    }
 
     DistanceMeasurement(double value, String units) {
         this.value = value;
