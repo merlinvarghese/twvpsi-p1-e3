@@ -1,6 +1,5 @@
 package com.tw.vapasi;
 
-import com.tw.vapasi.DistanceMeasurement.Unit;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -32,11 +31,11 @@ class DistanceMeasurementTest {
     }
 
     @Test
-    void expectTrueFor100CMand200CM() {
+    void expect100CM_NotEquals_200CM() {
         DistanceMeasurement centimeter100 = new DistanceMeasurement(100, Unit.CM);
-        DistanceMeasurement centimeter100Other = new DistanceMeasurement(200, Unit.CM);
+        DistanceMeasurement centimeter200 = new DistanceMeasurement(200, Unit.CM);
 
-        assertFalse(centimeter100.equals(centimeter100Other));
+        assertFalse(centimeter100.equals(centimeter200));
     }
 
     @Test

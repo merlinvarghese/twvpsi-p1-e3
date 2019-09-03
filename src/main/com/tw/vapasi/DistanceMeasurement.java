@@ -1,22 +1,17 @@
 package com.tw.vapasi;
 
-//Understand dimensions
+import java.util.Objects;
+
+//Understand length between two points
 class DistanceMeasurement {
-
     private double value;
-    private final Unit units;
-    private final int VALUE_ONELAKH = 100000;
-    private final int VALUE_HUNDRED = 100;
+    private final Unit unit;
+    private static final int KM_TO_CM = 100000;
+    private static final int M_TO_CM = 100;
 
-    enum Unit {
-        KM,
-        CM,
-        M
-    }
-
-    DistanceMeasurement(double value, Unit units) {
+    DistanceMeasurement(double value, Unit unit) {
         this.value = value;
-        this.units = units;
+        this.unit = unit;
     }
 
     @Override
@@ -26,19 +21,22 @@ class DistanceMeasurement {
         if (object == null || this.getClass() != object.getClass())
             return false;
         DistanceMeasurement measurementToCompare = (DistanceMeasurement) object;
-        if (this.units.equals(measurementToCompare.units)) {
+        if (this.unit.equals(measurementToCompare.unit)) {
             return this.value == measurementToCompare.value;
         }
-        return this.convertToCentimeter() == measurementToCompare.convertToCentimeter();
+        return (this.value * this.unit.getAction()) == (measurementToCompare.value * measurementToCompare.unit.getAction());
     }
 
-    private double convertToCentimeter() {
-        if (this.units.equals(Unit.M)) {
-            return this.value * VALUE_HUNDRED;
-        }
-        if (this.units.equals(Unit.KM)) {
-            return this.value * VALUE_ONELAKH;
-        }
-        return this.value;
+    @Override
+    public String toString() {
+        return "DistanceMeasurement{" +
+                "value=" + value +
+                ", unit=" + unit +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, unit);
     }
 }
