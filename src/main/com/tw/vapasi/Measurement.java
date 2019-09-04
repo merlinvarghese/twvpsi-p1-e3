@@ -4,13 +4,14 @@ import java.util.Objects;
 
 //Understand different units of measurement
 class Measurement {
-  private final double value;
-  private final Unit unit;
+   final double value;
+   final Unit unit;
 
   Measurement(double value, Unit unit) {
     this.value = value;
     this.unit = unit;
   }
+
 
   Measurement add(Measurement other) throws CannotAddException {
       if (!(this.unit.getType().equals(other.unit.getType()))) {
@@ -37,7 +38,7 @@ class Measurement {
       return this.value == measurementToCompare.value;
     }
     return ((this.value * this.unit.getConversionFactor()) ==
-        (measurementToCompare.value * measurementToCompare.unit.getConversionFactor()));
+        (measurementToCompare.value * measurementToCompare.unit.getConversionFactor()) + unit.getOffset());
   }
 
   @Override
@@ -51,6 +52,11 @@ class Measurement {
   @Override
   public int hashCode() {
     return Objects.hash(value, unit);
+  }
+
+   Measurement convert() {
+
+      return new Measurement((this.value * this.unit.getConversionFactor()) + this.unit.getOffset(),Unit.CELSIUS);
   }
 
 }

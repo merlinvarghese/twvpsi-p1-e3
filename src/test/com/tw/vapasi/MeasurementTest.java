@@ -89,9 +89,9 @@ class MeasurementTest {
 
   @Test
   void expect2200GForSumOf200Gand2KG() throws CannotAddException {
-    Measurement gram200 = new Measurement(200, Unit.G);
-    Measurement kilogram2 = new Measurement(2, Unit.KG);
-    Measurement expectedResult = new Measurement(2200.0, Unit.G);
+    Measurement gram200 = new AddableMeasurement(200, Unit.G);
+    Measurement kilogram2 = new AddableMeasurement(2, Unit.KG);
+    Measurement expectedResult = new AddableMeasurement(2200.0, Unit.G);
 
     assertEquals(expectedResult, gram200.add(kilogram2));
   }
@@ -107,4 +107,24 @@ class MeasurementTest {
       e.printStackTrace();
     }
   }
+
+  @Test
+  void expect0CWhenInputIsMinus273K() {
+    Measurement kelvin = new Measurement(-273, Unit.KELVIN);
+    Measurement celsius = new Measurement(0, Unit.CELSIUS);
+
+
+    assertTrue(kelvin.equals(celsius));
+
+  }
+  @Test
+  void expect270KWhenInputIsMinus543C(){
+    Measurement kelvin = new Measurement(0, Unit.KELVIN);
+    Measurement celsius = new Measurement(-273, Unit.CELSIUS);
+
+
+    assertTrue(celsius.equals(kelvin));
+  }
+
+
 }
