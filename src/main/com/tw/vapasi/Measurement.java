@@ -14,9 +14,8 @@ class Measurement {
 
   Measurement add(Measurement other) throws CannotAddException {
       if (!(this.unit.getType().equals(other.unit.getType()))) {
-          throw new CannotAddException("Incompatible Units");
+          throw new CannotAddException();
       }
-
     return new Measurement(
         (this.value * this.unit.getConversionFactor() +
             other.value * other.unit.getConversionFactor()), this.unit);

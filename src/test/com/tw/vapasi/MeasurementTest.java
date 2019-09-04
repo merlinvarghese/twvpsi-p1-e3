@@ -83,6 +83,7 @@ class MeasurementTest {
     Measurement centimeter100 = new Measurement(100, Unit.CM);
     Measurement meter2 = new Measurement(2, Unit.M);
     Measurement expectedResult = new Measurement(300, Unit.CM);
+
     assertEquals(expectedResult, centimeter100.add(meter2));
   }
 
@@ -96,18 +97,14 @@ class MeasurementTest {
   }
 
   @Test
-  void expectIncompatibleUnits200cmAnd2KG() {
+  void expectSumOfIncompatibleUnitsToThrowException() {
     Measurement centimeter200 = new Measurement(200, Unit.CM);
     Measurement kilogram2 = new Measurement(2, Unit.KG);
     try {
-      Measurement expectedResult = centimeter200.add(kilogram2);
+      centimeter200.add(kilogram2);
       Assertions.fail("Test has failed");
     } catch (CannotAddException e) {
       e.printStackTrace();
-
     }
-
   }
-
-
 }

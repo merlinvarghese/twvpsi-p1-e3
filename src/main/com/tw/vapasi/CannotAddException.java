@@ -1,10 +1,7 @@
 package com.tw.vapasi;
 
- public class CannotAddException extends Exception {
-  String message;
+class CannotAddException extends Exception {
+  CannotAddException() {
 
-  CannotAddException(String message) {
-    this.message = message;
   }
-
 }
